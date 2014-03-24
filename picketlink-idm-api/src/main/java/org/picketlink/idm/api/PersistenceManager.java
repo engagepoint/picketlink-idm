@@ -222,5 +222,5 @@ public interface PersistenceManager {
      * @return
      * @throws IdentityException
      */
-    boolean createUser(String identityName, Map<String, String> attributes) throws IdentityException;
+    User createUser(String identityName, Map<String, String> attributes) throws IdentityException;
 }

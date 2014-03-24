@@ -1,6 +1,7 @@
 package org.picketlink.idm.spi.store;
 
 import org.picketlink.idm.common.exception.IdentityException;
+import org.picketlink.idm.spi.model.IdentityObject;
 
 import java.util.List;
 import java.util.Map;
@@ -36,7 +37,7 @@ public interface IdentityStoreExt extends IdentityStore{
      * @throws IdentityException
      */
 
-    boolean createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException;
+    IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException;
 
     /**
      *

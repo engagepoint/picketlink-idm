@@ -609,7 +609,7 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
      * @return
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
-    public boolean createUser(String identityName, Map<String, String> attributes) throws IdentityException {
+    public User createUser(String identityName, Map<String, String> attributes) throws IdentityException {
         try
         {
             checkNotNullArgument(identityName, "Identity name");
@@ -619,7 +619,8 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
 
             preCreate(new SimpleUser(identityName));
 
-            return ((IdentityStoreExt)getRepository()).createIdentityObject(getInvocationContext(), identityName, attributes);
+            IdentityObject identityObject =  ((IdentityStoreExt)getRepository()).createIdentityObject(getInvocationContext(), identityName, attributes);
+            return new SimpleUser(identityObject.getId());
         }
         catch (IdentityException e)
         {
