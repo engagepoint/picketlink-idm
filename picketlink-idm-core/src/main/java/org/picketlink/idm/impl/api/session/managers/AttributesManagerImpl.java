@@ -40,7 +40,9 @@ import org.picketlink.idm.impl.api.SimpleAttribute;
 import org.picketlink.idm.impl.api.PasswordCredential;
 import org.picketlink.idm.impl.api.SimpleCredentialType;
 import org.picketlink.idm.impl.api.session.IdentitySessionImpl;
+import org.picketlink.idm.spi.store.IdentityStoreExt;
 
+import java.util.List;
 import java.util.Set;
 import java.util.Map;
 import java.util.HashMap;
@@ -712,4 +714,72 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
          throw e;
       }
    }
+
+    /**
+     * Change oldPassword of identity to newPassword
+     *
+     * @param identityName
+     * @param oldPassword
+     * @param newPassword
+     * @return true if successfully changed
+     */
+    public boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
+        try
+        {
+            checkNotNullArgument(identityName, "Identity name");
+            checkNotNullArgument(oldPassword, "Old password");
+            checkNotNullArgument(newPassword, "New password");
+
+            return ((IdentityStoreExt)getRepository()).changePassword(identityName, oldPassword, newPassword);
+        }
+        catch (IdentityException e)
+        {
+            if (log.isLoggable(Level.FINER))
+            {
+                log.log(Level.FINER, "Exception occurred: ", e);
+            }
+            throw e;
+        }
+    }
+
+    /**
+     * Change identity password to newPassword if challengePairs correct
+     *
+     * @param identityName
+     * @param challengePairs question - key, answer - value
+     * @param newPassword
+     * @return true if successfully changed
+     */
+    public boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
+        try
+        {
+            checkNotNullArgument(identityName, "Identity name");
+            checkNotNullArgument(newPassword, "New password");
+
+            return ((IdentityStoreExt)getRepository()).forgotPassword(identityName, challengePairs, newPassword);
+        }
+        catch (IdentityException e)
+        {
+            if (log.isLoggable(Level.FINER))
+            {
+                log.log(Level.FINER, "Exception occurred: ", e);
+            }
+            throw e;
+        }
+    }
+
+    public List<String> getIdentityChallengeQuestions(String identityName) throws IdentityException {
+        try
+        {
+            return ((IdentityStoreExt)getRepository()).getChallengeQuestions(identityName);
+        }
+        catch (IdentityException e)
+        {
+            if (log.isLoggable(Level.FINER))
+            {
+                log.log(Level.FINER, "Exception occurred: ", e);
+            }
+            throw e;
+        }
+    }
 }

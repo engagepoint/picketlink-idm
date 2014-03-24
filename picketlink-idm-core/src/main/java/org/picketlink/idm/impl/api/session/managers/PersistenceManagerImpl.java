@@ -33,11 +33,9 @@ import org.picketlink.idm.impl.api.model.GroupKey;
 import org.picketlink.idm.impl.api.model.SimpleUser;
 import org.picketlink.idm.impl.api.model.SimpleGroup;
 import org.picketlink.idm.impl.cache.GroupSearchImpl;
+import org.picketlink.idm.spi.store.IdentityStoreExt;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.Iterator;
+import java.util.*;
 import java.io.Serializable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -602,6 +600,36 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
 
       return findGroup(groupType, (IdentitySearchCriteria) null);
    }
+
+    /**
+     * Creates identity object with certain attributes
+     *
+     * @param identityName
+     * @param attributes
+     * @return
+     * @throws org.picketlink.idm.common.exception.IdentityException
+     */
+    public boolean createUser(String identityName, Map<String, String> attributes) throws IdentityException {
+        try
+        {
+            checkNotNullArgument(identityName, "Identity name");
+            checkObjectName(identityName);
+
+            IdentityObjectType iot = getUserObjectType();
+
+            preCreate(new SimpleUser(identityName));
+
+            return ((IdentityStoreExt)getRepository()).createIdentityObject(getInvocationContext(), identityName, attributes);
+        }
+        catch (IdentityException e)
+        {
+            if (log.isLoggable(Level.FINER))
+            {
+                log.log(Level.FINER, "Exception occurred: ", e);
+            }
+            throw e;
+        }
+    }
 
 
 }
