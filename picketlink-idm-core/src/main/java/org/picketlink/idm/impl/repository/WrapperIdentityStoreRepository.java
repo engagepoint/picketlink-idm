@@ -41,10 +41,7 @@ import org.picketlink.idm.spi.search.IdentityObjectSearchCriteria;
 import org.picketlink.idm.common.exception.IdentityException;
 import org.picketlink.idm.impl.store.SimpleIdentityStoreInvocationContext;
 
-import java.util.Map;
-import java.util.Collection;
-import java.util.Set;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Simply wraps IdentityStore and AttributeStore and delegates all the calls
@@ -425,5 +422,43 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
       return defaultAttributeStore.findIdentityObjectByUniqueAttribute(resolveAttributeStoreInvocationContext(invocationCtx), identityObjectType, attribute);
    }
 
-   
+    /**
+     * @param identityName
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
+    public boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
+        return defaultIdentityStore.changePassword(identityName, oldPassword, newPassword);
+    }
+
+    /**
+     * @param identityName
+     * @param challengePairs
+     * @param newPassword
+     * @return
+     */
+    public boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
+        return defaultIdentityStore.forgotPassword(identityName, challengePairs, newPassword);
+    }
+
+    /**
+     * @param invocationContext
+     * @param identityName
+     * @param attributes
+     * @return
+     * @throws org.picketlink.idm.common.exception.IdentityException
+     */
+    public IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException {
+        return defaultIdentityStore.createIdentityObject(invocationContext, identityName, attributes);
+    }
+
+    /**
+     * @param identityName
+     * @return
+     * @throws org.picketlink.idm.common.exception.IdentityException
+     */
+    public List<String> getChallengeQuestions(String identityName) throws IdentityException {
+        return defaultIdentityStore.getChallengeQuestions(identityName);
+    }
 }

@@ -2926,8 +2926,48 @@ public class LDAPIdentityStoreImpl implements IdentityStore
       }
    }
 
+    /**
+     * @param identityName
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
+    public boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
+        return false;
+    }
 
-   // Attributes
+    /**
+     * @param identityName
+     * @param challengePairs
+     * @param newPassword
+     * @return
+     */
+    public boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
+        return false;
+    }
+
+    /**
+     * @param invocationContext
+     * @param identityName
+     * @param attributes
+     * @return
+     * @throws org.picketlink.idm.common.exception.IdentityException
+     */
+    public IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException {
+        return null;
+    }
+
+    /**
+     * @param identityName
+     * @return
+     * @throws org.picketlink.idm.common.exception.IdentityException
+     */
+    public List<String> getChallengeQuestions(String identityName) throws IdentityException {
+        return null;
+    }
+
+
+    // Attributes
 
    public Set<String> getSupportedAttributeNames(IdentityStoreInvocationContext invocationContext,
                                                  IdentityObjectType identityType) throws IdentityException

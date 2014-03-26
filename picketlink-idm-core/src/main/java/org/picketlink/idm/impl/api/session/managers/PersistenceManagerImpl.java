@@ -27,13 +27,11 @@ import org.picketlink.idm.common.exception.IdentityException;
 import org.picketlink.idm.spi.model.IdentityObjectType;
 import org.picketlink.idm.spi.model.IdentityObject;
 import org.picketlink.idm.spi.store.IdentityObjectSearchCriteriaType;
-import org.picketlink.idm.impl.api.session.managers.AbstractManager;
 import org.picketlink.idm.impl.api.session.IdentitySessionImpl;
 import org.picketlink.idm.impl.api.model.GroupKey;
 import org.picketlink.idm.impl.api.model.SimpleUser;
 import org.picketlink.idm.impl.api.model.SimpleGroup;
 import org.picketlink.idm.impl.cache.GroupSearchImpl;
-import org.picketlink.idm.spi.store.IdentityStoreExt;
 
 import java.util.*;
 import java.io.Serializable;
@@ -619,7 +617,7 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
 
             preCreate(new SimpleUser(identityName));
 
-            IdentityObject identityObject =  ((IdentityStoreExt)getRepository()).createIdentityObject(getInvocationContext(), identityName, attributes);
+            IdentityObject identityObject =  getRepository().createIdentityObject(getInvocationContext(), identityName, attributes);
             return new SimpleUser(identityObject.getId());
         }
         catch (IdentityException e)

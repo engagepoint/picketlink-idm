@@ -40,7 +40,6 @@ import org.picketlink.idm.impl.api.SimpleAttribute;
 import org.picketlink.idm.impl.api.PasswordCredential;
 import org.picketlink.idm.impl.api.SimpleCredentialType;
 import org.picketlink.idm.impl.api.session.IdentitySessionImpl;
-import org.picketlink.idm.spi.store.IdentityStoreExt;
 
 import java.util.List;
 import java.util.Set;
@@ -730,7 +729,7 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
             checkNotNullArgument(oldPassword, "Old password");
             checkNotNullArgument(newPassword, "New password");
 
-            return ((IdentityStoreExt)getRepository()).changePassword(identityName, oldPassword, newPassword);
+            return getRepository().changePassword(identityName, oldPassword, newPassword);
         }
         catch (IdentityException e)
         {
@@ -756,7 +755,7 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
             checkNotNullArgument(identityName, "Identity name");
             checkNotNullArgument(newPassword, "New password");
 
-            return ((IdentityStoreExt)getRepository()).forgotPassword(identityName, challengePairs, newPassword);
+            return getRepository().forgotPassword(identityName, challengePairs, newPassword);
         }
         catch (IdentityException e)
         {
@@ -771,7 +770,7 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
     public List<String> getIdentityChallengeQuestions(String identityName) throws IdentityException {
         try
         {
-            return ((IdentityStoreExt)getRepository()).getChallengeQuestions(identityName);
+            return getRepository().getChallengeQuestions(identityName);
         }
         catch (IdentityException e)
         {
