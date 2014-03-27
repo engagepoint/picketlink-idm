@@ -464,41 +464,4 @@ public interface IdentityStore extends AttributeStore
     * @throws IdentityException
     */
    void updateCredential(IdentityStoreInvocationContext ctx, IdentityObject identityObject, IdentityObjectCredential credential) throws IdentityException;
-
-    /**
-     *
-     * @param identityName
-     * @param oldPassword
-     * @param newPassword
-     * @return
-     */
-    boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException;
-
-    /**
-     *
-     * @param identityName
-     * @param challengePairs
-     * @param newPassword
-     * @return
-     */
-    boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException;
-
-    /**
-     *
-     * @param invocationContext
-     * @param identityName
-     * @param attributes
-     * @return
-     * @throws IdentityException
-     */
-
-    IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException;
-
-    /**
-     *
-     * @param identityName
-     * @return
-     * @throws IdentityException
-     */
-    List<String> getChallengeQuestions(String identityName)throws IdentityException;
 }

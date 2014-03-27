@@ -22,11 +22,7 @@
 
 package org.picketlink.idm.impl.repository;
 
-import org.picketlink.idm.spi.store.IdentityStore;
-import org.picketlink.idm.spi.store.AttributeStore;
-import org.picketlink.idm.spi.store.IdentityStoreSession;
-import org.picketlink.idm.spi.store.FeaturesMetaData;
-import org.picketlink.idm.spi.store.IdentityStoreInvocationContext;
+import org.picketlink.idm.spi.store.*;
 import org.picketlink.idm.spi.configuration.metadata.IdentityObjectAttributeMetaData;
 import org.picketlink.idm.spi.configuration.IdentityRepositoryConfigurationContext;
 import org.picketlink.idm.spi.configuration.IdentityStoreConfigurationContext;
@@ -49,7 +45,7 @@ import java.util.*;
  * @author <a href="mailto:boleslaw.dawidowicz at redhat.com">Boleslaw Dawidowicz</a>
  * @version : 0.1 $
  */
-public class WrapperIdentityStoreRepository extends AbstractIdentityStoreRepository
+public class WrapperIdentityStoreRepository extends AbstractIdentityStoreRepository implements IdentityStoreExt
 {
 
    private final String id;
@@ -429,7 +425,7 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @return
      */
     public boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
-        return defaultIdentityStore.changePassword(identityName, oldPassword, newPassword);
+        return ((IdentityStoreExt)defaultIdentityStore).changePassword(identityName, oldPassword, newPassword);
     }
 
     /**
@@ -439,7 +435,7 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @return
      */
     public boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
-        return defaultIdentityStore.forgotPassword(identityName, challengePairs, newPassword);
+        return ((IdentityStoreExt)defaultIdentityStore).forgotPassword(identityName, challengePairs, newPassword);
     }
 
     /**
@@ -450,7 +446,7 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
     public IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException {
-        return defaultIdentityStore.createIdentityObject(invocationContext, identityName, attributes);
+        return ((IdentityStoreExt)defaultIdentityStore).createIdentityObject(invocationContext, identityName, attributes);
     }
 
     /**
@@ -459,6 +455,6 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
     public List<String> getChallengeQuestions(String identityName) throws IdentityException {
-        return defaultIdentityStore.getChallengeQuestions(identityName);
+        return ((IdentityStoreExt)defaultIdentityStore).getChallengeQuestions(identityName);
     }
 }
