@@ -477,4 +477,18 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
         }
         return challengeQuestions;
     }
+
+    /**
+     *
+     * @param identityName
+     * @param attributes
+     * @throws IdentityException
+     */
+    public void updateIdentityObjectAttributes(String identityName, Map<String, String> attributes) throws IdentityException {
+        try{
+            ((IdentityStoreExt)defaultIdentityStore).updateIdentityObjectAttributes(identityName, attributes);
+        }catch(ClassCastException e){
+            throw new IdentityException("Method updateUserAttributes(String identityName, Map<String, String> attributes) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+        }
+    }
 }
