@@ -17,7 +17,7 @@ public interface IdentityStoreExt extends IdentityStore {
      * @param newPassword
      * @return
      */
-    boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException;
+    void changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException;
 
     /**
      *
@@ -26,7 +26,7 @@ public interface IdentityStoreExt extends IdentityStore {
      * @param newPassword
      * @return
      */
-    boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException;
+    void forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException;
 
     /**
      *
@@ -46,4 +46,12 @@ public interface IdentityStoreExt extends IdentityStore {
      * @throws IdentityException
      */
     List<String> getChallengeQuestions(String identityName)throws IdentityException;
+
+    /**
+     *
+     * @param identityName
+     * @param attributes
+     * @throws IdentityException
+     */
+    void updateIdentityObjectAttributes(String identityName, Map<String, String> attributes) throws IdentityException;
 }

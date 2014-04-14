@@ -723,14 +723,14 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
      * @param newPassword
      * @return true if successfully changed
      */
-    public boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
+    public void changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
         try
         {
             checkNotNullArgument(identityName, "Identity name");
             checkNotNullArgument(oldPassword, "Old password");
             checkNotNullArgument(newPassword, "New password");
 
-            return ((IdentityStoreExt)getRepository()).changePassword(identityName, oldPassword, newPassword);
+            ((IdentityStoreExt)getRepository()).changePassword(identityName, oldPassword, newPassword);
         }
         catch (IdentityException e)
         {
@@ -750,13 +750,14 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
      * @param newPassword
      * @return true if successfully changed
      */
-    public boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
+    public void forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
         try
         {
             checkNotNullArgument(identityName, "Identity name");
             checkNotNullArgument(newPassword, "New password");
 
-            return ((IdentityStoreExt)getRepository()).forgotPassword(identityName, challengePairs, newPassword);
+            ((IdentityStoreExt)getRepository()).forgotPassword(identityName, challengePairs, newPassword);
+
         }
         catch (IdentityException e)
         {
@@ -782,4 +783,24 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
             throw e;
         }
     }
+
+    public void updateUserAttributes(String identityName, Map<String, String> attributes) throws IdentityException{
+        try
+        {
+            checkNotNullArgument(identityName, "Identity name");
+            checkNotNullArgument(attributes, "New attributes");
+
+            ((IdentityStoreExt)getRepository()).updateIdentityObjectAttributes(identityName, attributes);
+
+        }
+        catch (IdentityException e)
+        {
+            if (log.isLoggable(Level.FINER))
+            {
+                log.log(Level.FINER, "Exception occurred: ", e);
+            }
+            throw e;
+        }
+    };
+
 }

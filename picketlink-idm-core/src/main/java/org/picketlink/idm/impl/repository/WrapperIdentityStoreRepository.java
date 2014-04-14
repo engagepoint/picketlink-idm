@@ -424,8 +424,12 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @param newPassword
      * @return
      */
-    public boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
-        return ((IdentityStoreExt)defaultIdentityStore).changePassword(identityName, oldPassword, newPassword);
+    public void changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException {
+        try{
+            ((IdentityStoreExt)defaultIdentityStore).changePassword(identityName, oldPassword, newPassword);
+        }catch(ClassCastException e){
+            throw new IdentityException("Method changePassword(identityName, oldPassword, newPassword) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+        }
     }
 
     /**
@@ -434,8 +438,12 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @param newPassword
      * @return
      */
-    public boolean forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
-        return ((IdentityStoreExt)defaultIdentityStore).forgotPassword(identityName, challengePairs, newPassword);
+    public void forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) throws IdentityException {
+        try{
+            ((IdentityStoreExt)defaultIdentityStore).forgotPassword(identityName, challengePairs, newPassword);
+        }catch(ClassCastException e){
+            throw new IdentityException("Method forgotPassword(String identityName, Map<String, String> challengePairs, String newPassword) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+        }
     }
 
     /**
@@ -446,7 +454,13 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
     public IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException {
-        return ((IdentityStoreExt)defaultIdentityStore).createIdentityObject(invocationContext, identityName, attributes);
+        IdentityObject identityObject;
+        try{
+        identityObject = ((IdentityStoreExt)defaultIdentityStore).createIdentityObject(invocationContext, identityName, attributes);
+        }catch (ClassCastException e){
+            throw new IdentityException("Method createUser(String identityName, Map<String, String> attributes) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+        }
+        return identityObject;
     }
 
     /**
@@ -455,6 +469,12 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
     public List<String> getChallengeQuestions(String identityName) throws IdentityException {
-        return ((IdentityStoreExt)defaultIdentityStore).getChallengeQuestions(identityName);
+        List<String> challengeQuestions;
+        try{
+            challengeQuestions = ((IdentityStoreExt)defaultIdentityStore).getChallengeQuestions(identityName);
+        }catch (ClassCastException e){
+            throw new IdentityException("Method getChallengeQuestions(String identityName) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+        }
+        return challengeQuestions;
     }
 }

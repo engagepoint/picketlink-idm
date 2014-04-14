@@ -318,7 +318,7 @@ public interface AttributesManager
      * @param newPassword
      * @return true if successfully changed
      */
-    boolean changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException;
+    void changePassword(String identityName, String oldPassword, String newPassword) throws IdentityException;
 
     /**
      * Change identity password to newPassword if challengePairs correct
@@ -327,7 +327,7 @@ public interface AttributesManager
      * @param newPassword
      * @return true if successfully changed
      */
-    boolean forgotPassword(String identityName, Map<String,String> challengePairs, String newPassword) throws IdentityException;
+    void forgotPassword(String identityName, Map<String,String> challengePairs, String newPassword) throws IdentityException;
 
     /**
      *
@@ -336,4 +336,12 @@ public interface AttributesManager
      * @throws IdentityException
      */
     List<String> getIdentityChallengeQuestions(String identityName) throws IdentityException;
+
+    /**
+     *
+     * @param identityName
+     * @param attributes
+     * @throws IdentityException
+     */
+    void updateUserAttributes(String identityName, Map<String,String> attributes) throws IdentityException;
 }

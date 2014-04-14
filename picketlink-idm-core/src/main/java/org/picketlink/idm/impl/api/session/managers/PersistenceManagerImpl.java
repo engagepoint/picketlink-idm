@@ -618,7 +618,7 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
 
             preCreate(new SimpleUser(identityName));
 
-            IdentityObject identityObject =  ((IdentityStoreExt)getRepository()).createIdentityObject(getInvocationContext(), identityName, attributes);
+            IdentityObject identityObject = ((IdentityStoreExt)getRepository()).createIdentityObject(getInvocationContext(), identityName, attributes);
             return new SimpleUser(identityObject.getId());
         }
         catch (IdentityException e)
