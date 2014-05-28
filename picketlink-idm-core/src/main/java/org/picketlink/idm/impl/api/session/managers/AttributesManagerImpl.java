@@ -801,6 +801,26 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
             }
             throw e;
         }
-    };
+    }
+
+	public List<String> getPersonRoles(String identityName) throws IdentityException{
+		List<String> rolesList;
+		try
+		{
+			checkNotNullArgument(identityName, "Identity name");
+
+			rolesList = ((IdentityStoreExt)getRepository()).getPersonRoles(identityName);
+
+		}
+		catch (IdentityException e)
+		{
+			if (log.isLoggable(Level.FINER))
+			{
+				log.log(Level.FINER, "Exception occurred: ", e);
+			}
+			throw e;
+		}
+		return rolesList;
+	}
 
 }

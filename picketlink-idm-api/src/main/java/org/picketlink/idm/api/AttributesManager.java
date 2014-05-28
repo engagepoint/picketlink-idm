@@ -344,4 +344,12 @@ public interface AttributesManager
      * @throws IdentityException
      */
     void updateUserAttributes(String identityName, Map<String,String> attributes) throws IdentityException;
+
+	/**
+	 *
+	 * @param identityName
+	 * @return
+	 * @throws IdentityException
+	 */
+	List<String> getPersonRoles(String identityName) throws IdentityException;
 }

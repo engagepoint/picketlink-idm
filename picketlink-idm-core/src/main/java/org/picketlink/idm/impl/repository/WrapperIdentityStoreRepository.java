@@ -491,4 +491,20 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
             throw new IdentityException("Method updateUserAttributes(String identityName, Map<String, String> attributes) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
         }
     }
+
+	/**
+	 *
+	 * @param userId
+	 * @return role list
+	 * @throws IdentityException
+	 */
+	public List<String> getPersonRoles(String userId) throws IdentityException {
+		List<String> roleList = new ArrayList<String>();
+		try {
+			roleList = ((IdentityStoreExt)defaultIdentityStore).getPersonRoles(userId);
+		}catch(ClassCastException e){
+			throw new IdentityException("Method getPersonRoles(String userId) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+		}
+		return roleList;
+	}
 }

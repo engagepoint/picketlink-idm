@@ -54,4 +54,13 @@ public interface IdentityStoreExt extends IdentityStore {
      * @throws IdentityException
      */
     void updateIdentityObjectAttributes(String identityName, Map<String, String> attributes) throws IdentityException;
+
+	/**
+	 * Gets a role list by person id.
+	 *
+	 * @param userId
+	 * @return role list
+	 * @throws IdentityException
+	 */
+	List<String> getPersonRoles(String userId) throws IdentityException;
 }
