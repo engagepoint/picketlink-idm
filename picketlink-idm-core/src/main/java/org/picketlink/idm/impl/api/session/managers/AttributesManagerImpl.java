@@ -784,7 +784,7 @@ public class AttributesManagerImpl extends AbstractManager implements Attributes
         }
     }
 
-    public void updateUserAttributes(String identityName, Map<String, String> attributes) throws IdentityException{
+    public void updateUserAttributes(String identityName, Map<String, List<String>> attributes) throws IdentityException{
         try
         {
             checkNotNullArgument(identityName, "Identity name");

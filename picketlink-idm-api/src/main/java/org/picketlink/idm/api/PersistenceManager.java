@@ -25,6 +25,7 @@ package org.picketlink.idm.api;
 import org.picketlink.idm.common.exception.IdentityException;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -222,5 +223,5 @@ public interface PersistenceManager {
      * @return
      * @throws IdentityException
      */
-    User createUser(String identityName, Map<String, String> attributes) throws IdentityException;
+    User createUser(String identityName, Map<String, List<String>> attributes) throws IdentityException;
 }

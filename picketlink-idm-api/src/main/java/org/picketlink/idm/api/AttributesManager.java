@@ -343,7 +343,7 @@ public interface AttributesManager
      * @param attributes
      * @throws IdentityException
      */
-    void updateUserAttributes(String identityName, Map<String,String> attributes) throws IdentityException;
+    void updateUserAttributes(String identityName, Map<String,List<String>> attributes) throws IdentityException;
 
 	/**
 	 *

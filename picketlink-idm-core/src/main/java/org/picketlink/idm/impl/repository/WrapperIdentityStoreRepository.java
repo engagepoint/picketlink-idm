@@ -453,7 +453,7 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @return
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
-    public IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException {
+    public IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, List<String>> attributes) throws IdentityException {
         IdentityObject identityObject;
         try{
         identityObject = ((IdentityStoreExt)defaultIdentityStore).createIdentityObject(invocationContext, identityName, attributes);
@@ -484,7 +484,7 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
      * @param attributes
      * @throws IdentityException
      */
-    public void updateIdentityObjectAttributes(String identityName, Map<String, String> attributes) throws IdentityException {
+    public void updateIdentityObjectAttributes(String identityName, Map<String, List<String>> attributes) throws IdentityException {
         try{
             ((IdentityStoreExt)defaultIdentityStore).updateIdentityObjectAttributes(identityName, attributes);
         }catch(ClassCastException e){

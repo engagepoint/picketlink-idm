@@ -37,7 +37,7 @@ public interface IdentityStoreExt extends IdentityStore {
      * @throws IdentityException
      */
 
-    IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, String> attributes) throws IdentityException;
+    IdentityObject createIdentityObject(IdentityStoreInvocationContext invocationContext, String identityName, Map<String, List<String>> attributes) throws IdentityException;
 
     /**
      *
@@ -53,7 +53,7 @@ public interface IdentityStoreExt extends IdentityStore {
      * @param attributes
      * @throws IdentityException
      */
-    void updateIdentityObjectAttributes(String identityName, Map<String, String> attributes) throws IdentityException;
+    void updateIdentityObjectAttributes(String identityName, Map<String, List<String>> attributes) throws IdentityException;
 
 	/**
 	 * Gets a role list by person id.

@@ -608,7 +608,7 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
      * @return
      * @throws org.picketlink.idm.common.exception.IdentityException
      */
-    public User createUser(String identityName, Map<String, String> attributes) throws IdentityException {
+    public User createUser(String identityName, Map<String, List<String>> attributes) throws IdentityException {
         try
         {
             checkNotNullArgument(identityName, "Identity name");
