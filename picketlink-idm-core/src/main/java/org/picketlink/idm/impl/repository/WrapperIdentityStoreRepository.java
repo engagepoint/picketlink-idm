@@ -507,4 +507,14 @@ public class WrapperIdentityStoreRepository extends AbstractIdentityStoreReposit
 		}
 		return roleList;
 	}
+
+    public void deleteIdentityObject(String identityName) throws IdentityException {
+
+        try{
+           ((IdentityStoreExt)defaultIdentityStore).deleteIdentityObject(identityName);
+        }catch (ClassCastException e){
+            throw new IdentityException("Method createUser(String identityName, Map<String, String> attributes) can be used only with stores implementations  witch implement both of IdentityStore and IdentityStoreExt");
+        }
+
+    }
 }

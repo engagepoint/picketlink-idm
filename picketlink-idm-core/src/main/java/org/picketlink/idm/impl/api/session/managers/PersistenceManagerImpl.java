@@ -631,5 +631,24 @@ public class PersistenceManagerImpl extends AbstractManager implements Persisten
         }
     }
 
+    public void deleteUser(String identityName) throws IdentityException {
+        try
+        {
+            checkNotNullArgument(identityName, "Identity name");
+            checkObjectName(identityName);
+
+            ((IdentityStoreExt)getRepository()).deleteIdentityObject(identityName);
+
+        }
+        catch (IdentityException e)
+        {
+            if (log.isLoggable(Level.FINER))
+            {
+                log.log(Level.FINER, "Exception occurred: ", e);
+            }
+            throw e;
+        }
+    }
+
 
 }

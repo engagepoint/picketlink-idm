@@ -224,4 +224,12 @@ public interface PersistenceManager {
      * @throws IdentityException
      */
     User createUser(String identityName, Map<String, List<String>> attributes) throws IdentityException;
+
+    /**
+     *
+     * @param identityName
+     * @throws IdentityException
+     */
+    void deleteUser(String identityName) throws IdentityException;
+
 }
